@@ -1,36 +1,27 @@
 
+def merge_sort(arr)
+    return arr unless arr.size > 1
+      mid = arr.size/2
+        a, b, sorted = merge_sort(arr[0...mid]), merge_sort(arr[mid..-1]), []
+      sorted << (a[0] < b[0] ? a.shift : b.shift) while [a,b].none?(&:empty?)
+    sorted + a + b
+  end
+
 
 array = [7, 4, 5, 2, 6, 3, 8, 1]
+puts merge_sort(array)
 
 
-def merge_sort(array)
-    if array.length > 1
-        left_array = array[0..array.length/2 - 1]
-        right_array = array[array.length/2..-1]
-        merge_sort(left_array)
-        merge_sort(right_array)
 
-        
-        # separate function?
-        merge(left_array, right_array, result = [])
-            left_array_index = 0
-            right_array_index = 0
-            result = []
-
-            if left_array[left_array_index] < right array[right_array_index]
-                result << left_array[0]
-                left_array_index += 1
-            else
-                result << right_array[0]
-                right_array_index += 1
-            end
-
-        end
-        
-        # when one is finished merge the left over array to result 
-
-
-    end
+def merge_sort2(arr)
+    return arr unless arr.size > 1
+    mid = arr.size/2
+    left, right, result = merge_sort2(arr[0...mid]), merge_sort2(arr[mid..-1]), []
+    result << (left[0] < right[0] ? left.shift : right.shift) while [left,right].none?(&:empty?)
+    result + left + right
 end
 
-puts merge_sort(array)
+array = [7, 4, 5, 2, 6, 3, 8, 1]
+puts merge_sort2(array)
+
+# triple dot == end number -1    arr[0...mid] == arr[0..mid-1]
